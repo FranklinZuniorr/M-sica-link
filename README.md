@@ -1,2 +1,2 @@
-# M-sica-link
+# Musica-link
 Sistema de player de música com links do Youtube.
