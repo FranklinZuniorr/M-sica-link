@@ -1,2 +1,2 @@
-# Música-link
-Sistema de player de música com links do Youtube.
+# Reproduz link
+Sistema de reprodução e armazenamento de links do Youtube.
