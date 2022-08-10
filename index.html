@@ -57,16 +57,69 @@ margin-bottom: 20px;
 }
 </style>
 
+<script>
+var link = "";
+var videos = ['<iframe id="' + 0 + '" width="560" height="315" src="' + 'https://www.youtube.com/embed/BKDz5kNjkfU' + '"frameborder="0" ></iframe>'];
+var quantidade = 1;
+vds.innerHTML = videos[0];
+
+function pega(){
+link = document.getElementById("lk").value;
+document.getElementById("lk").value = "";
+
+if(link.includes("https://www.youtube.com/") || link.includes("www.youtube.com/") || link.includes("https://youtu.be/")){
+link = link.replace("watch?v=", "embed/");
+link = link.replace(".be/", ".be/embed/");
+link = link.replace("youtu.be", "www.youtube.com");
+
+
+videos[quantidade] = '<iframe id="' + quantidade + '" width="560" height="315" src="' + link + '"frameborder="0" ></iframe><br/><center>' + '<input type="button"' + 'onclick="dell(' + quantidade + ')"' + 'value="Apagar"></center>';
+
+console.log(videos);
+console.log(quantidade);
+
+vds.innerHTML = videos[quantidade] + vds.innerHTML;
+
+quantidade++;
+
+}else{
+sts.innerHTML = "Status: Insira um link do Youtube!";
+
+setTimeout(function(){sts.innerHTML = "Status: Tudo ok!";},5000);
+
+}
+
+}
+
+function dell(x){
+videos.splice(x, x++)
+quantidade--;
+console.log(videos)
+vds.innerHTML = "";
+for(y = 0; y < quantidade; y++){
+vds.innerHTML = videos[y] + vds.innerHTML;
+}
+}
+
+
+
+
+
+</script>
+
 </head>
 <body><center>
 <header>Reproduz link</header>
 
 <main>
-<section> <center> <input type="text" id="lk" placeholder="Insira seu link aqui!" width="100%"> <input type="button" value="Inserir link"></center> </section>
+<section><div id="sts">Status: Tudo ok!</div></section>
 
-<section><center> <iframe width="560" height="315" src="https://www.youtube.com/embed/wJnBTPUQS5A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </center></section>
+<section> <center> <input type="text" id="lk" placeholder="Insira seu link aqui!" width="100%"> <input type="button" id="bt" onclick="pega();" value="Inserir link"></center> </section>
+
+<section><center><div id="vds"><iframe width="560" height="315" src="https://www.youtube.com/embed/BKDz5kNjkfU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></center></section>
 </main>
 
 <footer></footer>
 </center></body>
 </html>
+
