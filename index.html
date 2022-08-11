@@ -22,7 +22,7 @@ width: 70%;
 display: flex;
 justify-content: center;
 font-family: raleway;
-font-size: 19px;
+font-size: 25px;
 }
 
 section{
@@ -40,7 +40,7 @@ background-color: yellow;
 padding-bottom: 20px;
 margin-bottom: 10px;
 margin-top: 10px;
-width: 40%;
+width: 70%;
 height: auto;
 }
 
@@ -68,7 +68,7 @@ margin-bottom: 20px;
 
 <script>
 var link = "";
-var videos = ['<div id="vid"><iframe id="' + 0 + '" width="80%" height="200px" src="' + 'https://www.youtube.com/embed/BKDz5kNjkfU' + '"frameborder="0" ></iframe><br/><center>Tutorial de como usar o site</center></div>'];
+var videos = ['<div id="vid"><iframe id="' + 0 + '" width="93%" height="300px" src="' + 'https://www.youtube.com/embed/BKDz5kNjkfU' + '"frameborder="0" ></iframe><br/><center>Tutorial de como usar o site</center></div>'];
 var quantidade = 1;
 var posi = 0;
 var selc = 1;
@@ -88,7 +88,7 @@ link = link.replace(".be/", ".be/embed/");
 link = link.replace("youtu.be", "www.youtube.com");
 
 
-videos[quantidade] = '<div id="vid"><iframe id="' + quantidade + '" width="80%" height="200px" src="' + link + '"frameborder="0" ></iframe><br/><center>' + '<input type="button"' + 'onclick="dell(' + quantidade + ')"' + 'value="Apagar"></center></div>';
+videos[quantidade] = '<div id="vid"><iframe id="' + quantidade + '" width="93%" height="300px" src="' + link + '"frameborder="0" ></iframe><br/><center>' + '<input type="button"' + 'onclick="dell(' + quantidade + ')"' + 'value="Apagar"></center></div>';
 
 console.log(videos);
 console.log(quantidade);
@@ -111,12 +111,14 @@ setTimeout(function(){sts.innerHTML = "Status: Tudo ok!";},5000);
 function dell(x = 0){
 videos.splice(x, 1)
 quantidade--;
-posi--;
 console.log(videos)
 vvds.innerHTML = "";
 des.innerHTML = videos[0];
-selc = selc -1;
 quan.innerHTML = "Destaque, vídeo: " + selc + "/" + quantidade;
+if(posi > 0){
+posi--;
+selc = selc -1;
+}
 for(y = 0; y < quantidade; y++){
 vvds.innerHTML = videos[y] + vvds.innerHTML;
 }
@@ -156,7 +158,7 @@ quan.innerHTML = "Destaque, vídeo: " + selc + "/" + quantidade;
 
 <section><center><div id="quan"></div><div id="des"></div><input type="button" id="px-" onclick="destaque(1);" value="Retrosceder"><input type="button" id="px+" onclick="destaque(2);" value="Avançar"></center></section>
 
-<section><center><div id="vvds"></div></center></section>
+<section><center>Vídeos em geral:<div id="vvds"></div></center></section>
 </main>
 
 <footer></footer>
