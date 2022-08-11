@@ -31,6 +31,14 @@ width: 80%;
 height: auto;
 }
 
+#vid{
+background-color: yellow;
+position: relative;
+margin-bottom: 20px;
+width: 90%;
+height: auto;
+}
+
 main{
 background-color: green;
 position: relative;
@@ -59,9 +67,15 @@ margin-bottom: 20px;
 
 <script>
 var link = "";
-var videos = ['<iframe id="' + 0 + '" width="560" height="315" src="' + 'https://www.youtube.com/embed/BKDz5kNjkfU' + '"frameborder="0" ></iframe>'];
+var videos = ['<div id="vid"><iframe id="' + 0 + '" width="560" height="315" src="' + 'https://www.youtube.com/embed/BKDz5kNjkfU' + '"frameborder="0" ></iframe></div>'];
 var quantidade = 1;
-vds.innerHTML = videos[0];
+
+inic();
+
+function inic(){
+vvds.innerHTML = "" + videos[0];
+}
+
 
 function pega(){
 link = document.getElementById("lk").value;
@@ -78,7 +92,7 @@ videos[quantidade] = '<iframe id="' + quantidade + '" width="560" height="315" s
 console.log(videos);
 console.log(quantidade);
 
-vds.innerHTML = videos[quantidade] + vds.innerHTML;
+vvds.innerHTML = videos[quantidade] + vvds.innerHTML;
 
 quantidade++;
 
@@ -95,9 +109,9 @@ function dell(x = 0){
 videos.splice(x, 1)
 quantidade--;
 console.log(videos)
-vds.innerHTML = "";
+vvds.innerHTML = "";
 for(y = 0; y < quantidade; y++){
-vds.innerHTML = videos[y] + vds.innerHTML;
+vvds.innerHTML = videos[y] + vvds.innerHTML;
 }
 }
 
@@ -114,9 +128,9 @@ vds.innerHTML = videos[y] + vds.innerHTML;
 <main>
 <section><div id="sts">Status: Tudo ok!</div></section>
 
-<section> <center> <input type="text" id="lk" placeholder="Insira seu link aqui!" width="100%"> <input type="button" id="bt" onclick="pega();" value="Inserir link"></center> </section>
+<section> <center><input type="text" id="lk" placeholder="Insira seu link aqui!" width="100%"> <input type="button" id="bt" onclick="pega();" value="Inserir link"></center></section>
 
-<section><center><div id="vds"><iframe width="560" height="315" src="https://www.youtube.com/embed/BKDz5kNjkfU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div></center></section>
+<section><center><div id="vvds">rt</div></center></section>
 </main>
 
 <footer></footer>
