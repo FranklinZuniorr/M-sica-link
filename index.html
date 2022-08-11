@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 
 <title>Reproduz link</title>
+<link rel="icon" href="13434234.jpg">
 <meta name="author" content="Franklin Vieira Barbosa"> 
 <meta name="description" content="Meta Tags na Devmedia"> 
 <meta name="keywords" content="sites, web, Youtube, música>
@@ -33,11 +34,24 @@ margin-top: 10px;
 padding: 1%;
 width: 80%;
 height: auto;
+font-family: raleway;
+font-size: 14px;
 }
 
 #vid{
 background-color: yellow;
 padding-bottom: 20px;
+margin-bottom: 10px;
+margin-top: 10px;
+width: 70%;
+height: auto;
+font-family: raleway;
+}
+
+#quan{
+background-color: yellow;
+padding-bottom: 10px;
+padding-top: 10px;
 margin-bottom: 10px;
 margin-top: 10px;
 width: 70%;
@@ -52,6 +66,7 @@ padding: 1%;
 top: 10px;
 height: auto;
 width: 70%;
+font-family: raleway;
 }
 
 #lk{
@@ -72,9 +87,31 @@ var videos = ['<div id="vid"><iframe id="' + 0 + '" width="93%" height="300px" s
 var quantidade = 1;
 var posi = 0;
 var selc = 1;
+var salvo = 0;
 
+salvo = window.localStorage.getItem("sv");
+console.log(salvo);
+
+if(salvo == 1){
+quantidade = window.localStorage.getItem("qtt");
+console.log(quantidade);
+videos = window.localStorage.getItem("vdds");
+data = JSON.parse(videos);
+videos = data;
+console.log(videos);
+setTimeout(function(){des.innerHTML = videos[0];},100);
+
+setTimeout(function(){
+for(y = 0; y < quantidade; y++){
+vvds.innerHTML = videos[y] + vvds.innerHTML;
+}},100);
+}
+
+if(salvo == 0){
 setTimeout(function(){vvds.innerHTML = "" + videos[0];},100);
 setTimeout(function(){des.innerHTML = videos[0];},100);
+}
+
 setTimeout(function(){quan.innerHTML = "Destaque, vídeo: " + selc + "/" + quantidade;},100);
 
 
@@ -97,6 +134,11 @@ vvds.innerHTML = videos[quantidade] + vvds.innerHTML;
 
 quantidade++;
 
+salvo = 1;
+window.localStorage.setItem("sv", salvo);
+window.localStorage.setItem("vdds", JSON.stringify(videos));
+window.localStorage.setItem("qtt", quantidade);
+
 quan.innerHTML = "Destaque, vídeo: " + selc + "/" + quantidade; 
 
 }else{
@@ -111,9 +153,13 @@ setTimeout(function(){sts.innerHTML = "Status: Tudo ok!";},5000);
 function dell(x = 0){
 videos.splice(x, 1)
 quantidade--;
+window.localStorage.setItem("vdds", JSON.stringify(videos));
+window.localStorage.setItem("qtt", quantidade);
 console.log(videos)
 vvds.innerHTML = "";
 des.innerHTML = videos[0];
+selc = 1;
+posi = 0;
 quan.innerHTML = "Destaque, vídeo: " + selc + "/" + quantidade;
 if(posi > 0){
 posi--;
@@ -143,20 +189,27 @@ quan.innerHTML = "Destaque, vídeo: " + selc + "/" + quantidade;
 }
 }
 
+function apagar(){
+salvo = 0;
+window.localStorage.setItem("sv", salvo);
+window.localStorage.removeItem("vdds");
+window.localStorage.removeItem("qtt");
+}
+
 
 
 </script>
 
 </head>
 <body><center>
-<header>Reproduz link</header>
+<header><img src="1660259090959.png" width="25%" height="25%"></header>
 
 <main>
 <section><div id="sts">Status: Tudo ok!</div></section>
 
 <section> <center><input type="text" id="lk" placeholder="Insira seu link aqui!" width="100%"> <input type="button" id="bt" onclick="pega();" value="Inserir link"></center></section>
 
-<section><center><div id="quan"></div><div id="des"></div><input type="button" id="px-" onclick="destaque(1);" value="Retroceder"><input type="button" id="px+" onclick="destaque(2);" value="Avançar"></center></section>
+<section><center><div id="quan"></div><div id="des"></div><input type="button" id="px-" onclick="destaque(1);" value="Retroceder"><input type="button" id="px+" onclick="destaque(2);" value="Avançar"><input id="apaga" type="button" onclick="apagar();" value="Apagar todos os vídeos"></center></section>
 
 <section><center>Vídeos em geral:<div id="vvds"></div></center></section>
 </main>
