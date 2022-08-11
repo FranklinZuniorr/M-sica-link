@@ -14,6 +14,8 @@ header{
 background-color: blue;
 position: relative;
 margin-bottom: 10px;
+margin-top: 10px;
+padding: 1%;
 top: 5px;
 height: auto;
 width: 70%;
@@ -26,16 +28,19 @@ font-size: 19px;
 section{
 background-color: grey;
 position: relative;
-margin-bottom: 20px;
+margin-bottom: 10px;
+margin-top: 10px;
+padding: 1%;
 width: 80%;
 height: auto;
 }
 
 #vid{
 background-color: yellow;
-position: relative;
-margin-bottom: 20px;
-width: 90%;
+padding-bottom: 20px;
+margin-bottom: 10px;
+margin-top: 10px;
+width: 40%;
 height: auto;
 }
 
@@ -43,6 +48,7 @@ main{
 background-color: green;
 position: relative;
 margin-bottom: 50px;
+padding: 1%;
 top: 10px;
 height: auto;
 width: 70%;
@@ -50,11 +56,6 @@ width: 70%;
 
 #lk{
 width: 30%;
-margin-top: 20px;
-margin-bottom: 20px;
-}
-
-video{
 margin-top: 20px;
 margin-bottom: 20px;
 }
@@ -67,14 +68,14 @@ margin-bottom: 20px;
 
 <script>
 var link = "";
-var videos = ['<div id="vid"><iframe id="' + 0 + '" width="560" height="315" src="' + 'https://www.youtube.com/embed/BKDz5kNjkfU' + '"frameborder="0" ></iframe></div>'];
+var videos = ['<div id="vid"><iframe id="' + 0 + '" width="80%" height="200px" src="' + 'https://www.youtube.com/embed/BKDz5kNjkfU' + '"frameborder="0" ></iframe><br/><center>Tutorial de como usar o site</center></div>'];
 var quantidade = 1;
+var posi = 0;
+var selc = 1;
 
-inic();
-
-function inic(){
-vvds.innerHTML = "" + videos[0];
-}
+setTimeout(function(){vvds.innerHTML = "" + videos[0];},100);
+setTimeout(function(){des.innerHTML = videos[0];},100);
+setTimeout(function(){quan.innerHTML = "Destaque, vídeo: " + selc + "/" + quantidade;},100);
 
 
 function pega(){
@@ -87,7 +88,7 @@ link = link.replace(".be/", ".be/embed/");
 link = link.replace("youtu.be", "www.youtube.com");
 
 
-videos[quantidade] = '<iframe id="' + quantidade + '" width="560" height="315" src="' + link + '"frameborder="0" ></iframe><br/><center>' + '<input type="button"' + 'onclick="dell(' + quantidade + ')"' + 'value="Apagar"></center>';
+videos[quantidade] = '<div id="vid"><iframe id="' + quantidade + '" width="80%" height="200px" src="' + link + '"frameborder="0" ></iframe><br/><center>' + '<input type="button"' + 'onclick="dell(' + quantidade + ')"' + 'value="Apagar"></center></div>';
 
 console.log(videos);
 console.log(quantidade);
@@ -95,6 +96,8 @@ console.log(quantidade);
 vvds.innerHTML = videos[quantidade] + vvds.innerHTML;
 
 quantidade++;
+
+quan.innerHTML = "Destaque, vídeo: " + selc + "/" + quantidade; 
 
 }else{
 sts.innerHTML = "Status: Insira um link do Youtube!";
@@ -108,14 +111,35 @@ setTimeout(function(){sts.innerHTML = "Status: Tudo ok!";},5000);
 function dell(x = 0){
 videos.splice(x, 1)
 quantidade--;
+posi--;
 console.log(videos)
 vvds.innerHTML = "";
+des.innerHTML = videos[0];
+selc = selc -1;
+quan.innerHTML = "Destaque, vídeo: " + selc + "/" + quantidade;
 for(y = 0; y < quantidade; y++){
 vvds.innerHTML = videos[y] + vvds.innerHTML;
 }
 }
 
+function destaque(p){
 
+if(p == 1 && posi > 0){
+p = 0;
+posi--;
+selc--;
+setTimeout(function(){des.innerHTML = videos[posi];},100);
+quan.innerHTML = "Destaque, vídeo: " + selc + "/" + quantidade; 
+}
+
+if(p == 2 && posi < quantidade-1){
+p = 0;
+posi++;
+selc++;
+setTimeout(function(){des.innerHTML = videos[posi];},100);
+quan.innerHTML = "Destaque, vídeo: " + selc + "/" + quantidade; 
+}
+}
 
 
 
@@ -130,7 +154,9 @@ vvds.innerHTML = videos[y] + vvds.innerHTML;
 
 <section> <center><input type="text" id="lk" placeholder="Insira seu link aqui!" width="100%"> <input type="button" id="bt" onclick="pega();" value="Inserir link"></center></section>
 
-<section><center><div id="vvds">rt</div></center></section>
+<section><center><div id="quan"></div><div id="des"></div><input type="button" id="px-" onclick="destaque(1);" value="Retrosceder"><input type="button" id="px+" onclick="destaque(2);" value="Avançar"></center></section>
+
+<section><center><div id="vvds"></div></center></section>
 </main>
 
 <footer></footer>
